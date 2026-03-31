@@ -15,101 +15,114 @@
        DESIGN TOKENS — copy this :root block into every page
        ════════════════════════════════════════════════════════ */
     :root {
-      /* Backgrounds (old paper feel) */
-      --bg: #f7f4ea;
-      --bg2: #f1ecdf;
-      --bg3: #e8e2d3;
-      --bg4: #ddd6c3;
+      /* Backgrounds (old paper feel, slightly more contrast separation) */
+      --bg: #f5f1e6;
+      --bg2: #eee8d8;
+      --bg3: #e4ddcc;
+      --bg4: #d6cfbb;
 
-      /* Borders */
-      --border: rgba(60, 50, 30, 0.12);
-      --border-hover: rgba(60, 50, 30, 0.22);
+      /* Borders (more visible) */
+      --border: rgba(60, 50, 30, 0.18);
+      --border-hover: rgba(60, 50, 30, 0.32);
 
-      /* Text (ink-like tones) */
-      --text: #2c2a26;
-      --text-muted: #6e6a5e;
-      --text-dim: #9a9486;
+      /* Text (stronger ink contrast) */
+      --text: #1f1d1a;
+      --text-muted: #5f5a4f;
+      --text-dim: #8a8476;
 
-      /* Accent (muted vintage blue) */
-      --accent: #5b6f9a;
-      --accent-light: #7f92b8;
-      --accent-dim: rgba(82, 106, 149, 0.12);
+      /* Accent (slightly stronger for readability) */
+      --accent: #4e6290;
+      --accent-light: #6f84b3;
+      --accent-dim: rgba(78, 98, 144, 0.16);
 
       /* Typography */
       --mono: 'JetBrains Mono', monospace;
       --serif: 'Fraunces', Georgia, serif;
 
-      /* Status badges (earthy, slightly desaturated) */
-      --badge-get-bg: rgba(76, 145, 110, 0.15);
-      --badge-get-text: #3f7f5f;
-      --badge-put-bg: rgba(181, 104, 75, 0.15);
-      --badge-put-text: #a0553c;
-      --badge-nav-bg: rgba(91, 111, 154, 0.15);
-      --badge-nav-text: #5b6f9a;
-      --badge-manage-bg: rgba(166, 124, 54, 0.15);
-      --badge-manage-text: #9c7632;
-      --badge-info-bg: rgba(160, 80, 70, 0.12);
-      --badge-info-text: #8f4a42;
+      /* Status badges (more readable contrast) */
+      --badge-get-bg: rgba(76, 145, 110, 0.18);
+      --badge-get-text: #2f6f52;
+      --badge-put-bg: rgba(181, 104, 75, 0.18);
+      --badge-put-text: #8f4832;
+      --badge-nav-bg: rgba(91, 111, 154, 0.18);
+      --badge-nav-text: #4e6290;
+      --badge-manage-bg: rgba(166, 124, 54, 0.18);
+      --badge-manage-text: #7d5f28;
+      --badge-info-bg: rgba(160, 80, 70, 0.16);
+      --badge-info-text: #7c3e37;
 
-      /* Semantic callout colors — light mode */
-      --callout-info-bg: rgba(91, 111, 154, 0.10);
-      --callout-info-border: rgba(91, 111, 154, 0.25);
-      --callout-info-text: #5b6f9a;
-      --callout-warn-bg: rgba(166, 124, 54, 0.10);
-      --callout-warn-border: rgba(166, 124, 54, 0.25);
-      --callout-warn-text: #9c7632;
-      --callout-success-bg: rgba(76, 145, 110, 0.10);
-      --callout-success-border: rgba(76, 145, 110, 0.25);
-      --callout-success-text: #3f7f5f;
-      --callout-error-bg: rgba(160, 80, 70, 0.10);
-      --callout-error-border: rgba(160, 80, 70, 0.25);
-      --callout-error-text: #8f4a42;
+      /* Callouts (boosted clarity) */
+      --callout-info-bg: rgba(78, 98, 144, 0.14);
+      --callout-info-border: rgba(78, 98, 144, 0.35);
+      --callout-info-text: #3f5280;
+
+      --callout-warn-bg: rgba(166, 124, 54, 0.14);
+      --callout-warn-border: rgba(166, 124, 54, 0.35);
+      --callout-warn-text: #7d5f28;
+
+      --callout-success-bg: rgba(76, 145, 110, 0.14);
+      --callout-success-border: rgba(76, 145, 110, 0.35);
+      --callout-success-text: #2f6f52;
+
+      --callout-error-bg: rgba(160, 80, 70, 0.14);
+      --callout-error-border: rgba(160, 80, 70, 0.35);
+      --callout-error-text: #7c3e37;
     }
 
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg: #0d0f14;
-        --bg2: #13151c;
-        --bg3: #1a1d26;
-        --bg4: #212433;
+        /* Backgrounds (slightly more separation) */
+        --bg: #0c0e13;
+        --bg2: #12141b;
+        --bg3: #181b24;
+        --bg4: #20232e;
 
-        --border: rgba(255, 255, 255, 0.06);
-        --border-hover: rgba(255, 255, 255, 0.14);
+        /* Borders (clearer structure) */
+        --border: rgba(255, 255, 255, 0.10);
+        --border-hover: rgba(255, 255, 255, 0.20);
 
-        --text: #f1f3f8;
-        --text-muted: #9aa0b5;
-        --text-dim: #6c7086;
+        /* Text (improved readability hierarchy) */
+        --text: #f5f7fb;
+        --text-muted: #b2b8cc;
+        --text-dim: #7c8298;
 
-        --accent: #6c8cff;
-        --accent-light: #9bb0ff;
-        --accent-dim: rgba(94, 124, 226, 0.12);
+        /* Accent (more vivid for dark bg) */
+        --accent: #7c9dff;
+        --accent-light: #a9bbff;
+        --accent-dim: rgba(124, 157, 255, 0.18);
 
+        /* Typography */
         --mono: 'JetBrains Mono', monospace;
         --serif: 'Fraunces', Georgia, serif;
 
-        --badge-get-bg: rgba(46, 204, 113, 0.12);
-        --badge-get-text: #4ade80;
-        --badge-put-bg: rgba(255, 120, 70, 0.12);
-        --badge-put-text: #ff9b73;
-        --badge-nav-bg: rgba(108, 140, 255, 0.12);
-        --badge-nav-text: #9bb0ff;
-        --badge-manage-bg: rgba(245, 158, 11, 0.12);
-        --badge-manage-text: #fbbf24;
-        --badge-info-bg: rgba(239, 68, 68, 0.12);
-        --badge-info-text: #f87171;
+        /* Badges (clearer text contrast) */
+        --badge-get-bg: rgba(46, 204, 113, 0.16);
+        --badge-get-text: #6ee7a3;
+        --badge-put-bg: rgba(255, 120, 70, 0.16);
+        --badge-put-text: #ffb08a;
+        --badge-nav-bg: rgba(124, 157, 255, 0.16);
+        --badge-nav-text: #a9bbff;
+        --badge-manage-bg: rgba(245, 158, 11, 0.16);
+        --badge-manage-text: #fcd34d;
+        --badge-info-bg: rgba(239, 68, 68, 0.16);
+        --badge-info-text: #fca5a5;
 
-        --callout-info-bg: rgba(108, 140, 255, 0.10);
-        --callout-info-border: rgba(108, 140, 255, 0.25);
-        --callout-info-text: #9bb0ff;
-        --callout-warn-bg: rgba(245, 158, 11, 0.10);
-        --callout-warn-border: rgba(245, 158, 11, 0.25);
-        --callout-warn-text: #fbbf24;
-        --callout-success-bg: rgba(46, 204, 113, 0.10);
-        --callout-success-border: rgba(46, 204, 113, 0.25);
-        --callout-success-text: #4ade80;
-        --callout-error-bg: rgba(239, 68, 68, 0.10);
-        --callout-error-border: rgba(239, 68, 68, 0.25);
-        --callout-error-text: #f87171;
+        /* Callouts (more visible borders + text) */
+        --callout-info-bg: rgba(124, 157, 255, 0.14);
+        --callout-info-border: rgba(124, 157, 255, 0.35);
+        --callout-info-text: #a9bbff;
+
+        --callout-warn-bg: rgba(245, 158, 11, 0.14);
+        --callout-warn-border: rgba(245, 158, 11, 0.35);
+        --callout-warn-text: #fcd34d;
+
+        --callout-success-bg: rgba(46, 204, 113, 0.14);
+        --callout-success-border: rgba(46, 204, 113, 0.35);
+        --callout-success-text: #6ee7a3;
+
+        --callout-error-bg: rgba(239, 68, 68, 0.14);
+        --callout-error-border: rgba(239, 68, 68, 0.35);
+        --callout-error-text: #fca5a5;
       }
     }
 
@@ -1648,7 +1661,8 @@
           <div class="tip-label">Max-width</div>
           <div class="tip-text">The <code>.main</code> column has <code>max-width: 860px</code>. The sidebar is
             <code>220px</code> wide. On screens narrower than 768px, the sidebar is hidden (<code>display: none</code>)
-            and the main area uses <code>padding: 0 1rem 4rem</code>.</div>
+            and the main area uses <code>padding: 0 1rem 4rem</code>.
+          </div>
         </div>
       </section>
 
@@ -1733,7 +1747,8 @@ window.addEventListener('scroll', () => {
           <h2><em>Sections</em></h2>
           <p class="section-desc">Content is organized into <code>&lt;section class="section"&gt;</code> blocks. Each
             section has a <code>.section-header</code> (h2 + description) and a body of components. Use
-            <code>.sub-label</code> to divide content within a section.</p>
+            <code>.sub-label</code> to divide content within a section.
+          </p>
         </div>
 
         <div class="code-block">
@@ -1769,7 +1784,8 @@ window.addEventListener('scroll', () => {
           </div>
           <div class="step-body">
             <div class="step-desc">Body content goes here. Use <code>.step-desc</code> for text, then
-              <code>.code-block</code> components for commands. The <em>em tag</em> renders in accent-light color.</div>
+              <code>.code-block</code> components for commands. The <em>em tag</em> renders in accent-light color.
+            </div>
             <div class="code-block">
               <div class="code-header"><span class="code-label">bash</span><button class="copy-btn"
                   onclick="cp(this)">copy</button></div>
@@ -2239,7 +2255,8 @@ function cp(btn) {
         <div class="sub-label">sub-label divider (shown above)</div>
         <p class="section-desc" style="margin-bottom:1rem;">Sub-labels use <code>display:flex</code> with a
           <code>::after</code> pseudo-element that draws a full-width line. Use them to divide content within a section
-          without adding a new section heading.</p>
+          without adding a new section heading.
+        </p>
 
         <div class="sub-label">header pills</div>
         <div class="header-pills" style="margin-bottom:1rem;">
@@ -2271,7 +2288,8 @@ function cp(btn) {
         <div class="section-header">
           <h2>JavaScript <em>patterns</em></h2>
           <p class="section-desc">Three small JS functions cover all interactivity. Copy them verbatim into every page's
-            <code>&lt;script&gt;</code> block.</p>
+            <code>&lt;script&gt;</code> block.
+          </p>
         </div>
 
         <div class="code-block">
