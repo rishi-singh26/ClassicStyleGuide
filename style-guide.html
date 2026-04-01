@@ -10,6 +10,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&display=swap"
     rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     /* ════════════════════════════════════════════════════════
        DESIGN TOKENS — copy this :root block into every page
@@ -152,15 +153,10 @@
     /* ════════════════════════════════════════════════════════
        PAGE LAYOUT — sidebar + main content
        ════════════════════════════════════════════════════════ */
-    .layout {
-      display: flex;
-      min-height: 100vh;
-    }
 
     /* ── Sidebar ── */
     .sidebar {
       width: 220px;
-      flex-shrink: 0;
       border-right: 1px solid var(--border);
       padding: 2rem 0;
       position: sticky;
@@ -235,7 +231,6 @@
 
     /* ── Main content area ── */
     .main {
-      flex: 1;
       min-width: 0;
       padding: 0 2.5rem 5rem;
       max-width: 860px;
@@ -831,32 +826,20 @@
        GRID CARDS  (2-column info boxes — e.g. connection options)
        ════════════════════════════════════════════════════════ */
     .connect-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
       margin-bottom: 1.5rem;
-    }
-
-    @media (max-width: 600px) {
-      .connect-grid {
-        grid-template-columns: 1fr;
-      }
     }
 
     .connect-box {
       background: var(--bg2);
       border: 1px solid var(--border);
       border-radius: 10px;
+      height: 100%;
       padding: 1rem 1.1rem;
       transition: border-color 0.2s;
     }
 
     .connect-box:hover {
       border-color: var(--border-hover);
-    }
-
-    .connect-box.full {
-      grid-column: 1 / -1;
     }
 
     .connect-label {
@@ -1025,26 +1008,13 @@
 
     /* 2-column form grid */
     .gen-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
       margin-bottom: 12px;
-    }
-
-    @media (max-width: 640px) {
-      .gen-grid {
-        grid-template-columns: 1fr;
-      }
     }
 
     .gen-field {
       display: flex;
       flex-direction: column;
       gap: 5px;
-    }
-
-    .gen-field.full {
-      grid-column: 1 / -1;
     }
 
     /* Field label */
@@ -1185,10 +1155,6 @@
       padding: 1.5rem 0;
       font-size: 11px;
       color: var(--text-dim);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
       gap: 8px;
     }
 
@@ -1217,9 +1183,8 @@
        MOBILE DRAWER — hamburger + slide-in sidebar
        ════════════════════════════════════════════════════════ */
 
-    /* Hamburger button — hidden on desktop */
+    /* Hamburger button — shown on mobile via Bootstrap d-flex d-md-none */
     .menu-toggle {
-      display: none;
       position: fixed;
       top: 12px;
       left: 12px;
@@ -1267,10 +1232,6 @@
     }
 
     @media (max-width: 768px) {
-      .menu-toggle {
-        display: flex;
-      }
-
       .main {
         padding: 0 1rem 4rem;
         padding-top: 3.5rem;
@@ -1403,7 +1364,7 @@
   <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
 
   <!-- Mobile hamburger button -->
-  <button class="menu-toggle" id="menuToggle" onclick="openDrawer()" aria-label="Open navigation">
+  <button class="menu-toggle d-flex d-md-none" id="menuToggle" onclick="openDrawer()" aria-label="Open navigation">
     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect x="2" y="4" width="14" height="1.5" rx="0.75" fill="currentColor" style="color:var(--text-muted)" />
       <rect x="2" y="8.25" width="14" height="1.5" rx="0.75" fill="currentColor" style="color:var(--text-muted)" />
@@ -1411,10 +1372,10 @@
     </svg>
   </button>
 
-  <div class="layout">
+  <div class="layout d-flex min-vh-100">
 
     <!-- ══ SIDEBAR ══ -->
-    <aside class="sidebar" id="sidebar">
+    <aside class="sidebar flex-shrink-0" id="sidebar">
       <!-- Close button (mobile only) -->
       <button class="drawer-close" onclick="closeDrawer()" aria-label="Close navigation">✕</button>
       <div class="sidebar-logo">
@@ -1458,7 +1419,7 @@
     </aside>
 
     <!-- ══ MAIN ══ -->
-    <main class="main">
+    <main class="main flex-grow-1">
 
       <!-- PAGE HEADER -->
       <div class="page-header" id="overview">
@@ -1473,7 +1434,7 @@
         </div>
         <div class="header-pills">
           <span class="pill">CSS variables</span>
-          <span class="pill">No framework</span>
+          <span class="pill">Bootstrap 5</span>
           <span class="pill">Vanilla JS</span>
           <span class="pill">Google Fonts</span>
         </div>
@@ -1636,8 +1597,8 @@
         <div class="code-block">
           <div class="code-header"><span class="code-label">HTML skeleton</span><button class="copy-btn"
               onclick="cp(this)">copy</button></div>
-          <pre>&lt;div class="layout"&gt;
-  &lt;aside class="sidebar"&gt;
+          <pre>&lt;div class="layout d-flex min-vh-100"&gt;
+  &lt;aside class="sidebar flex-shrink-0"&gt;
     &lt;div class="sidebar-logo"&gt;
       &lt;div class="sidebar-logo-label"&gt;// Guide&lt;/div&gt;
       &lt;div class="sidebar-logo-title"&gt;Title &lt;em&gt;Keyword&lt;/em&gt;&lt;/div&gt;
@@ -1649,19 +1610,19 @@
       &lt;/div&gt;
     &lt;/nav&gt;
   &lt;/aside&gt;
-  &lt;main class="main"&gt;
+  &lt;main class="main flex-grow-1"&gt;
     &lt;div class="page-header" id="overview"&gt;...&lt;/div&gt;
     &lt;section class="section" id="my-section"&gt;...&lt;/section&gt;
-    &lt;footer&gt;...&lt;/footer&gt;
+    &lt;footer class="d-flex justify-content-between align-items-center flex-wrap"&gt;...&lt;/footer&gt;
   &lt;/main&gt;
 &lt;/div&gt;</pre>
         </div>
 
         <div class="tip-box">
           <div class="tip-label">Max-width</div>
-          <div class="tip-text">The <code>.main</code> column has <code>max-width: 860px</code>. The sidebar is
-            <code>220px</code> wide. On screens narrower than 768px, the sidebar is hidden (<code>display: none</code>)
-            and the main area uses <code>padding: 0 1rem 4rem</code>.
+          <div class="tip-text">The <code>.main</code> column has <code>max-width: 860px</code> and uses Bootstrap's
+            <code>flex-grow-1</code>. The sidebar is <code>220px</code> wide with Bootstrap's <code>flex-shrink-0</code>.
+            On screens narrower than 768px, the sidebar becomes a slide-in drawer and the main area uses <code>padding: 0 1rem 4rem</code>.
           </div>
         </div>
       </section>
@@ -2000,36 +1961,44 @@ function cp(btn) {
             short related items. The <code>.full</code> modifier spans both columns.</p>
         </div>
 
-        <div class="connect-grid">
-          <div class="connect-box">
-            <div class="connect-label">Card label</div>
-            <div class="connect-cmd">command or value here</div>
-            <div class="connect-note">Explanatory note. Supports <code>inline code</code>.</div>
+        <div class="connect-grid row g-2">
+          <div class="col-12 col-md-6">
+            <div class="connect-box">
+              <div class="connect-label">Card label</div>
+              <div class="connect-cmd">command or value here</div>
+              <div class="connect-note">Explanatory note. Supports <code>inline code</code>.</div>
+            </div>
           </div>
-          <div class="connect-box">
-            <div class="connect-label">Another card</div>
-            <div class="connect-cmd">sftp -P 2222 user@host</div>
-            <div class="connect-note">Each card is independently hoverable and shows border on hover.</div>
+          <div class="col-12 col-md-6">
+            <div class="connect-box">
+              <div class="connect-label">Another card</div>
+              <div class="connect-cmd">sftp -P 2222 user@host</div>
+              <div class="connect-note">Each card is independently hoverable and shows border on hover.</div>
+            </div>
           </div>
-          <div class="connect-box full">
-            <div class="connect-label">Full-width card (class="connect-box full")</div>
-            <div class="connect-cmd">exit · bye · quit · Ctrl+D</div>
-            <div class="connect-note">Spans the full grid width. Use for items that don't fit neatly into the two-column
-              layout.</div>
+          <div class="col-12">
+            <div class="connect-box">
+              <div class="connect-label">Full-width card (col-12 wrapper)</div>
+              <div class="connect-cmd">exit · bye · quit · Ctrl+D</div>
+              <div class="connect-note">Spans the full grid width. Use for items that don't fit neatly into the two-column
+                layout.</div>
+            </div>
           </div>
         </div>
 
         <div class="code-block">
           <div class="code-header"><span class="code-label">HTML</span><button class="copy-btn"
               onclick="cp(this)">copy</button></div>
-          <pre>&lt;div class="connect-grid"&gt;
-  &lt;div class="connect-box"&gt;
-    &lt;div class="connect-label"&gt;Label&lt;/div&gt;
-    &lt;div class="connect-cmd"&gt;command&lt;/div&gt;
-    &lt;div class="connect-note"&gt;Note text.&lt;/div&gt;
+          <pre>&lt;div class="connect-grid row g-2"&gt;
+  &lt;div class="col-12 col-md-6"&gt;
+    &lt;div class="connect-box"&gt;
+      &lt;div class="connect-label"&gt;Label&lt;/div&gt;
+      &lt;div class="connect-cmd"&gt;command&lt;/div&gt;
+      &lt;div class="connect-note"&gt;Note text.&lt;/div&gt;
+    &lt;/div&gt;
   &lt;/div&gt;
-  &lt;div class="connect-box"&gt;...&lt;/div&gt;
-  &lt;div class="connect-box full"&gt;...&lt;/div&gt; &lt;!-- spans full width --&gt;
+  &lt;div class="col-12 col-md-6"&gt;&lt;div class="connect-box"&gt;...&lt;/div&gt;&lt;/div&gt;
+  &lt;div class="col-12"&gt;&lt;div class="connect-box"&gt;...&lt;/div&gt;&lt;/div&gt; &lt;!-- spans full width --&gt;
 &lt;/div&gt;</pre>
         </div>
       </section>
@@ -2126,21 +2095,27 @@ function cp(btn) {
           <div class="generator-body">
 
             <div class="gen-section-title">text inputs</div>
-            <div class="gen-grid">
-              <div class="gen-field">
-                <label class="gen-label">Input label</label>
-                <input class="gen-input" placeholder="Placeholder text" />
+            <div class="gen-grid row g-2">
+              <div class="col-12 col-sm-6">
+                <div class="gen-field">
+                  <label class="gen-label">Input label</label>
+                  <input class="gen-input" placeholder="Placeholder text" />
+                </div>
               </div>
-              <div class="gen-field">
-                <label class="gen-label">Select field</label>
-                <select class="gen-select">
-                  <option>Option one</option>
-                  <option>Option two</option>
-                </select>
+              <div class="col-12 col-sm-6">
+                <div class="gen-field">
+                  <label class="gen-label">Select field</label>
+                  <select class="gen-select">
+                    <option>Option one</option>
+                    <option>Option two</option>
+                  </select>
+                </div>
               </div>
-              <div class="gen-field full">
-                <label class="gen-label">Full-width input (class="gen-field full")</label>
-                <input class="gen-input" placeholder="Spans both columns" />
+              <div class="col-12">
+                <div class="gen-field">
+                  <label class="gen-label">Full-width input (col-12 wrapper)</label>
+                  <input class="gen-input" placeholder="Spans both columns" />
+                </div>
               </div>
             </div>
 
@@ -2183,10 +2158,15 @@ function cp(btn) {
   &lt;/div&gt;
   &lt;div class="generator-body"&gt;
     &lt;div class="gen-section-title"&gt;section&lt;/div&gt;
-    &lt;div class="gen-grid"&gt;
-      &lt;div class="gen-field"&gt;
-        &lt;label class="gen-label"&gt;Label&lt;/label&gt;
-        &lt;input class="gen-input" placeholder="..." /&gt;
+    &lt;div class="gen-grid row g-2"&gt;
+      &lt;div class="col-12 col-sm-6"&gt;
+        &lt;div class="gen-field"&gt;
+          &lt;label class="gen-label"&gt;Label&lt;/label&gt;
+          &lt;input class="gen-input" placeholder="..." /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="col-12"&gt;  &lt;!-- full-width field --&gt;
+        &lt;div class="gen-field"&gt;...&lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
     &lt;button class="gen-btn gen-btn-primary"&gt;Generate&lt;/button&gt;
@@ -2276,7 +2256,7 @@ function cp(btn) {
         <div class="code-block" style="margin-top:1rem;">
           <div class="code-header"><span class="code-label">HTML — footer</span><button class="copy-btn"
               onclick="cp(this)">copy</button></div>
-          <pre>&lt;footer&gt;
+          <pre>&lt;footer class="d-flex justify-content-between align-items-center flex-wrap"&gt;
   &lt;span&gt;Left side text&lt;/span&gt;
   &lt;span&gt;Right side text &amp;nbsp;·&amp;nbsp; more&lt;/span&gt;
 &lt;/footer&gt;</pre>
@@ -2357,15 +2337,24 @@ function cp(btn) {
   &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
   &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
   &lt;link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&amp;family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&amp;display=swap" rel="stylesheet"&gt;
+  &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
   &lt;style&gt;
     /* ── Paste the full :root { } and @media dark { :root { } }
-       blocks from the style guide here, then all component CSS ── */
+       blocks from the style guide here, then all component CSS ──
+       Bootstrap handles layout (d-flex, flex-grow-1, row/col, etc.)
+       Custom CSS handles look & feel (colors, typography, components) ── */
   &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
-&lt;div class="layout"&gt;
 
-  &lt;aside class="sidebar"&gt;
+&lt;!-- Mobile hamburger (Bootstrap d-flex d-md-none handles visibility) --&gt;
+&lt;button class="menu-toggle d-flex d-md-none" id="menuToggle" onclick="openDrawer()"&gt;&#9776;&lt;/button&gt;
+&lt;div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"&gt;&lt;/div&gt;
+
+&lt;div class="layout d-flex min-vh-100"&gt;
+
+  &lt;aside class="sidebar flex-shrink-0" id="sidebar"&gt;
+    &lt;button class="drawer-close" onclick="closeDrawer()"&gt;&amp;#x2715;&lt;/button&gt;
     &lt;div class="sidebar-logo"&gt;
       &lt;div class="sidebar-logo-label"&gt;// Guide&lt;/div&gt;
       &lt;div class="sidebar-logo-title"&gt;Page &lt;em&gt;Title&lt;/em&gt;&lt;/div&gt;
@@ -2379,7 +2368,7 @@ function cp(btn) {
     &lt;/nav&gt;
   &lt;/aside&gt;
 
-  &lt;main class="main"&gt;
+  &lt;main class="main flex-grow-1"&gt;
 
     &lt;div class="page-header" id="overview"&gt;
       &lt;div class="page-header-label"&gt;// Category&lt;/div&gt;
@@ -2398,7 +2387,7 @@ function cp(btn) {
       &lt;!-- components here --&gt;
     &lt;/section&gt;
 
-    &lt;footer&gt;
+    &lt;footer class="d-flex justify-content-between align-items-center flex-wrap"&gt;
       &lt;span&gt;Left text&lt;/span&gt;
       &lt;span&gt;Right text&lt;/span&gt;
     &lt;/footer&gt;
@@ -2453,7 +2442,7 @@ function cp(btn) {
         </div>
       </section>
 
-      <footer>
+      <footer class="d-flex justify-content-between align-items-center flex-wrap">
         <span>Technical Docs Style Guide</span>
         <span>Light &amp; dark mode &nbsp;·&nbsp; JetBrains Mono + Fraunces</span>
       </footer>
