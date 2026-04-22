@@ -1148,6 +1148,69 @@
     }
 
     /* ════════════════════════════════════════════════════════
+       SWITCH / SEGMENTED PICKER
+       ════════════════════════════════════════════════════════ */
+    .switch {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 2px;
+    }
+
+    .switch-input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+    }
+
+    .switch-label {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 60px;
+      height: 28px;
+      padding: 0 14px;
+      border-radius: 7px;
+      font-size: 12px;
+      font-family: var(--mono);
+      font-weight: 500;
+      color: var(--text-muted);
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+      transition: color 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .switch-selection {
+      position: absolute;
+      z-index: 1;
+      top: 2px;
+      left: 2px;
+      height: calc(100% - 4px);
+      border-radius: 7px;
+      background: var(--bg);
+      border: 1px solid var(--border-hover);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.10);
+      transition:
+        left 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        width 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      pointer-events: none;
+    }
+
+    .switch-input:checked + .switch-label {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* ════════════════════════════════════════════════════════
        FOOTER
        ════════════════════════════════════════════════════════ */
     footer {
@@ -1407,6 +1470,7 @@
           <a class="nav-link" onclick="navTo('grid-cards')">Grid cards</a>
           <a class="nav-link" onclick="navTo('tables')">Tables</a>
           <a class="nav-link" onclick="navTo('forms')">Form components</a>
+          <a class="nav-link" onclick="navTo('switch')">Switch / segmented</a>
           <a class="nav-link" onclick="navTo('badges')">Badges</a>
           <a class="nav-link" onclick="navTo('misc')">Misc elements</a>
         </div>
@@ -2176,6 +2240,106 @@ function cp(btn) {
         </div>
       </section>
 
+      <!-- SWITCH / SEGMENTED PICKER -->
+      <section class="section" id="switch">
+        <div class="section-header">
+          <h2>Switch / <em>segmented picker</em></h2>
+          <p class="section-desc">An iOS-style segmented control built from radio inputs. Works with any number of
+            segments. The sliding pill is positioned via JS on mount and on each change event.</p>
+        </div>
+
+        <div class="sub-label">2 segments</div>
+        <div style="margin-bottom:1.5rem;">
+          <div class="switch">
+            <input type="radio" class="switch-input" name="sg-calls" value="all" id="sg-all" checked>
+            <label for="sg-all" class="switch-label">All</label>
+            <input type="radio" class="switch-input" name="sg-calls" value="missed" id="sg-missed">
+            <label for="sg-missed" class="switch-label">Missed</label>
+            <span class="switch-selection"></span>
+          </div>
+        </div>
+
+        <div class="sub-label">3 segments</div>
+        <div style="margin-bottom:1.5rem;">
+          <div class="switch">
+            <input type="radio" class="switch-input" name="sg-period" value="day" id="sg-day" checked>
+            <label for="sg-day" class="switch-label">Day</label>
+            <input type="radio" class="switch-input" name="sg-period" value="week" id="sg-week">
+            <label for="sg-week" class="switch-label">Week</label>
+            <input type="radio" class="switch-input" name="sg-period" value="month" id="sg-month">
+            <label for="sg-month" class="switch-label">Month</label>
+            <span class="switch-selection"></span>
+          </div>
+        </div>
+
+        <div class="sub-label">on / off</div>
+        <div style="margin-bottom:1.5rem;">
+          <div class="switch">
+            <input type="radio" class="switch-input" name="sg-toggle" value="on" id="sg-on" checked>
+            <label for="sg-on" class="switch-label">ON</label>
+            <input type="radio" class="switch-input" name="sg-toggle" value="off" id="sg-off">
+            <label for="sg-off" class="switch-label">OFF</label>
+            <span class="switch-selection"></span>
+          </div>
+        </div>
+
+        <div class="code-block" style="margin-top:1rem;">
+          <div class="code-header"><span class="code-label">HTML</span><button class="copy-btn"
+              onclick="cp(this)">copy</button></div>
+          <pre>&lt;div class="switch"&gt;
+  &lt;input type="radio" class="switch-input" name="group" value="a" id="opt-a" checked&gt;
+  &lt;label for="opt-a" class="switch-label"&gt;Option A&lt;/label&gt;
+
+  &lt;input type="radio" class="switch-input" name="group" value="b" id="opt-b"&gt;
+  &lt;label for="opt-b" class="switch-label"&gt;Option B&lt;/label&gt;
+
+  &lt;span class="switch-selection"&gt;&lt;/span&gt;
+&lt;/div&gt;</pre>
+        </div>
+
+        <div class="code-block">
+          <div class="code-header"><span class="code-label">JavaScript — init</span><button class="copy-btn"
+              onclick="cp(this)">copy</button></div>
+          <pre>function initSwitch(switchEl) {
+  const inputs = [...switchEl.querySelectorAll('.switch-input')];
+  const labels = [...switchEl.querySelectorAll('.switch-label')];
+  const pill   = switchEl.querySelector('.switch-selection');
+  if (!pill || inputs.length === 0) return;
+
+  function movePill(index) {
+    const label      = labels[index];
+    const switchRect = switchEl.getBoundingClientRect();
+    const labelRect  = label.getBoundingClientRect();
+    pill.style.left  = (labelRect.left - switchRect.left) + 'px';
+    pill.style.width = labelRect.width + 'px';
+  }
+
+  function initPill() {
+    const idx = inputs.findIndex(i =&gt; i.checked);
+    pill.style.transition = 'none';
+    movePill(idx &gt;= 0 ? idx : 0);
+    requestAnimationFrame(() =&gt; { pill.style.transition = ''; });
+  }
+
+  inputs.forEach((input, idx) =&gt; input.addEventListener('change', () =&gt; movePill(idx)));
+  initPill();
+  window.addEventListener('resize', initPill);
+}
+
+document.querySelectorAll('.switch').forEach(initSwitch);</pre>
+        </div>
+
+        <div class="tip-box">
+          <div class="tip-label">Usage notes</div>
+          <div class="tip-text">
+            Each <code>.switch</code> group needs a unique <code>name</code> on its radio inputs. The
+            <code>.switch-selection</code> span must be the last child. Add as many
+            <code>input + label</code> pairs as needed — the pill width and position are computed from the
+            label's bounding rect.
+          </div>
+        </div>
+      </section>
+
       <!-- BADGES -->
       <section class="section" id="badges">
         <div class="section-header">
@@ -2497,6 +2661,36 @@ function cp(btn) {
       document.body.style.overflow = '';
       menuToggle.classList.remove('menu-toggle__hidden');
     }
+
+    /* ── Switch / segmented picker ──────────────────────────── */
+    function initSwitch(switchEl) {
+      const inputs = [...switchEl.querySelectorAll('.switch-input')];
+      const labels = [...switchEl.querySelectorAll('.switch-label')];
+      const pill   = switchEl.querySelector('.switch-selection');
+      if (!pill || inputs.length === 0) return;
+
+      function movePill(index) {
+        const label      = labels[index];
+        const switchRect = switchEl.getBoundingClientRect();
+        const labelRect  = label.getBoundingClientRect();
+        // Reducing left by 1px below to account for switch's 1px border, so the pill fits snugly inside the switch border
+        pill.style.left  = (labelRect.left - switchRect.left - 1) + 'px';
+        pill.style.width = labelRect.width + 'px';
+      }
+
+      function initPill() {
+        const idx = inputs.findIndex(i => i.checked);
+        pill.style.transition = 'none';
+        movePill(idx >= 0 ? idx : 0);
+        requestAnimationFrame(() => { pill.style.transition = ''; });
+      }
+
+      inputs.forEach((input, idx) => input.addEventListener('change', () => movePill(idx)));
+      initPill();
+      window.addEventListener('resize', initPill);
+    }
+
+    document.querySelectorAll('.switch').forEach(initSwitch);
 
     /* Close drawer when a nav link is tapped on mobile */
     document.querySelectorAll('.nav-link').forEach(link => {
